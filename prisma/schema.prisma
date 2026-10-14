@@ -50,5 +50,24 @@ model Lixeira {
 @@map("lixeiras")
 }
 model notificacoes  {
-  
+ id Int @id @default(autoincrement())
+ lixeira_id Int
+ titulo String
+ mensagem String
+ lida Boolean
+ criadoEm Datetime @default(now())
+ lixeira Lixeira @relation(fields:[lixeira_id], references:[id], onDelete:Cascade)
+@@index ([lixeira_id], map: "notificacoes_lixeira_id_fkey")
+@@map("notificacoes")
+}
+enum Perfil{
+  MORADOR
+  GESTOR
+}
+enum Tipo {
+  PLASTICO
+  VIDRO
+  PAPEL
+  METAL
+  ORGANICO
 }
